@@ -2,7 +2,7 @@ from ipmininet.iptopo import IPTopo
 from ipmininet.router.config import BGP, ebgp_session, AF_INET6
 
 
-class SimpleBGPTopo(IPTopo):
+class SimpleTopo(IPTopo):
 
     def build(self, *args, **kwargs):
         """

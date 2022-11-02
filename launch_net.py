@@ -1,4 +1,3 @@
-import importlib
 import ipmininet
 from ipmininet.ipnet import IPNet
 from ipmininet.cli import IPCLI
@@ -14,7 +13,7 @@ from simple_topo_med import SimpleBGPTopoMed
 from simple_topo_missing1 import SimpleBGPTopoMissing1
 from simple_topo_missing2 import SimpleBGPTopoMissing2
 from simple_topo_missing3 import SimpleBGPTopoMissing3
-from simple_topo import SimpleBGPTopo
+from simple_topo import SimpleTopo
 from simple_topo_routes import SimpleBGPTopoRoutes
 from simple_topo_rr import SimpleBGPTopoRR
 from topo_2rr_1 import BGPTopo2RR1
@@ -40,7 +39,7 @@ TOPOS = {'simple_bgp_network': SimpleBGPTopo,
          'simple_topo_missing1': SimpleBGPTopoMissing1,
          'simple_topo_missing2': SimpleBGPTopoMissing2,
          'simple_topo_missing3': SimpleBGPTopoMissing3,
-         'simple_topo': SimpleBGPTopo,
+         'simple_topo': SimpleTopo,
          'simple_topo_rr': SimpleBGPTopoRR,
          'topo_2rr_1': BGPTopo2RR1,
          'topo_2rr_2': BGPTopo2RR2,
