@@ -1,9 +1,15 @@
-from ipmininet.router.config import BGP
+from ipmininet.router.config import BGP, CommunityList
 from ipmininet.router.config.zebra import RouteMapSetAction
 from simple_bgp_network import SimpleBGPTopo
 
 
 class LocalPrefTopo(SimpleBGPTopo):
+
+    def create_community_lists(self):
+        community_list = CommunityList(
+            'local-pref-list', community='2:80')
+
+        return [community_list]
 
     def setRouteMapsForCommunity(self, community_list, as1r1, as2r1, as2r2, as3r1):
         for route_map_name in ['as1r1-ipv4-in', 'as1r1-ipv6-in']:

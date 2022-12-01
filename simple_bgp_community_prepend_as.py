@@ -1,9 +1,15 @@
-from ipmininet.router.config import BGP
+from ipmininet.router.config import BGP, CommunityList
 from ipmininet.router.config.zebra import RouteMapSetAction
 from simple_bgp_network import SimpleBGPTopo
 
 
 class PrependASTopo(SimpleBGPTopo):
+
+    def create_community_lists(self):
+        community_list = CommunityList(
+            'prepend-as-list', community='2:90')
+
+        return [community_list]
 
     def setRouteMapsForCommunity(self, community_list, as1r1, as2r1, as2r2, as3r1):
         for route_map_name in ['as3r1-ipv4-out', 'as3r1-ipv6-out']:
@@ -24,6 +30,6 @@ class PrependASTopo(SimpleBGPTopo):
                 matching=(community_list,),
                 set_action=RouteMapSetAction(
                     'as-path',
-                    'prepend 5'
+                    'prepend 2'
                 )
             )

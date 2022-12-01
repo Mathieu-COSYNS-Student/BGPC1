@@ -1,6 +1,7 @@
 from ipmininet.iptopo import IPTopo
 from ipmininet.router.config import BGP, ebgp_session, AccessList, CommunityList
 import ipmininet.router.config.bgp as _bgp
+from ipmininet.node_description import RouterDescription
 
 
 class SimpleBGPTopo(IPTopo):
@@ -38,15 +39,11 @@ class SimpleBGPTopo(IPTopo):
         all_al4 = AccessList(family='ipv4', name='allv4', entries=('any',))
         all_al6 = AccessList(family='ipv6', name='allv6', entries=('any',))
 
-        # Add a community list to as2r1
-        test_community_list = CommunityList('test-community', community='2:80')
-
-        self.setRouteMapsForCommunity(
-            test_community_list, as1r1, as2r1, as2r2, as3r1)
-
-        # as1r1 set the community of all the route sent to as2r1 and matching the access lists all_al{4,6} to 2:80
-        as1r1.get_config(BGP).set_community(
-            '2:80', to_peer=as2r1, matching=(all_al4, all_al6))
+        for community_list in self.create_community_lists():
+            self.setRouteMapsForCommunity(
+                community_list, as1r1, as2r1, as2r2, as3r1)
+            as1r1.get_config(BGP).set_community(
+                community_list.community, to_peer=as2r1, matching=(all_al4, all_al6))
 
         # Set AS-ownerships
         self.addAS(1, (as1r1,))
@@ -72,5 +69,13 @@ class SimpleBGPTopo(IPTopo):
             _bgp.AF_INET6(redistribute=('connected',))))
         return r
 
-    def setRouteMapsForCommunity(self, community_list, as1r1, as2r1, as2r2, as3r1):
+    def create_community_lists(self):
+        return []
+
+    def setRouteMapsForCommunity(self,
+                                 community_list: CommunityList,
+                                 as1r1: RouterDescription,
+                                 as2r1: RouterDescription,
+                                 as2r2: RouterDescription,
+                                 as3r1: RouterDescription):
         pass
