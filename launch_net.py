@@ -19,10 +19,10 @@ TOPOS = {
     'simple_bgp_network': SimpleBGPTopo,
     'simple_bgp_community_local_pref': LocalPrefTopo,
     'simple_bgp_community_prepend_as': PrependASTopo,
+    'simple_bgp_community_prepend_as_2': PrependAS2Topo,
     'simple_bgp_community_no_advertise': NoAdvertiseTopo,
     'simple_bgp_community_no_export': NoExportTopo,
     'simple_bgp_community_gracefull_shutdown': GracefullShutdownTopo,
-    'simple_bgp_community_prepend_as_2': PrependAS2Topo,
     'simple_bgp_community_blackhole': BlackholeTopo,
 }
 

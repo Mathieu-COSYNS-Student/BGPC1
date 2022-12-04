@@ -11,6 +11,11 @@ where TOPO is one the following topologies:
 - simple_bgp_network
 - simple_bgp_community_local_pref
 - simple_bgp_community_prepend_as
+- simple_bgp_community_prepend_as_2
+- simple_bgp_community_no_advertise
+- simple_bgp_community_no_export
+- simple_bgp_community_gracefull_shutdown
+- simple_bgp_community_blackhole
 
 ## Useful Commands
 
