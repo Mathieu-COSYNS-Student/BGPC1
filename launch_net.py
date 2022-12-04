@@ -9,6 +9,7 @@ from simple_bgp_community_local_pref import LocalPrefTopo
 from simple_bgp_community_prepend_as import PrependASTopo
 from simple_bgp_community_no_advertise import NoAdvertise
 from simple_bgp_community_no_export import NoExport
+from simple_bgp_community_prepend_as_2 import PrependAS2Topo
 
 import argparse
 
@@ -18,6 +19,7 @@ TOPOS = {
     'simple_bgp_community_prepend_as': PrependASTopo,
     'simple_bgp_community_no_advertise': NoAdvertise,
     'simple_bgp_community_no_export': NoExport,
+    'simple_bgp_community_prepend_as_2': PrependAS2Topo,
 }
 
 

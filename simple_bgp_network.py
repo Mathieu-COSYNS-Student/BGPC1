@@ -1,3 +1,4 @@
+from typing import Optional
 from ipmininet.iptopo import IPTopo
 from ipmininet.router.config import BGP, ebgp_session, AccessList, CommunityList
 import ipmininet.router.config.bgp as _bgp
@@ -39,11 +40,18 @@ class SimpleBGPTopo(IPTopo):
         all_al4 = AccessList(family='ipv4', name='allv4', entries=('any',))
         all_al6 = AccessList(family='ipv6', name='allv6', entries=('any',))
 
+        communities = ''
+        communities_sep = ''
+
         for community_list in self.create_community_lists():
-            self.setRouteMapsForCommunity(
+            self.set_route_maps_for_community(
                 community_list, as1r1, as2r1, as2r2, as3r1)
+            communities += communities_sep + community_list.community
+            communities_sep = ' '
+
+        if communities != '':
             as1r1.get_config(BGP).set_community(
-                community_list.community, to_peer=as2r1, matching=(all_al4, all_al6))
+                communities, to_peer=as2r1, matching=(all_al4, all_al6))
 
         # Set AS-ownerships
         self.addAS(1, (as1r1,))
@@ -72,10 +80,28 @@ class SimpleBGPTopo(IPTopo):
     def create_community_lists(self):
         return []
 
-    def setRouteMapsForCommunity(self,
-                                 community_list: CommunityList,
-                                 as1r1: RouterDescription,
-                                 as2r1: RouterDescription,
-                                 as2r2: RouterDescription,
-                                 as3r1: RouterDescription):
+    def set_route_maps_for_community(self,
+                                     community_list: CommunityList,
+                                     as1r1: RouterDescription,
+                                     as2r1: RouterDescription,
+                                     as2r2: RouterDescription,
+                                     as3r1: RouterDescription):
         pass
+
+    def route_map_add_exit_policy(self,
+                                  router: RouterDescription,
+                                  route_map_name: str,
+                                  route_map_order: str,
+                                  exit_policy: Optional[str] = None):
+        """
+        ipmininet does not have a interface to add exit policies on route maps!
+        This is a hacky why to do it.
+        """
+        route_maps = router.get_config(BGP).topo.getNodeInfo(
+            router, 'bgp_route_maps', list)
+
+        for route_map in route_maps:
+            if route_map_name == route_map.name:
+                for order, route_map_entry in route_map.entries.items():
+                    if route_map_order == order:
+                        route_map_entry.exit_policy = exit_policy
