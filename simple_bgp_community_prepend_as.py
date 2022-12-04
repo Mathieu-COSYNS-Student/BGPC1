@@ -11,7 +11,7 @@ class PrependASTopo(SimpleBGPTopo):
 
         return [community_list]
 
-    def setRouteMapsForCommunity(self, community_list, as1r1, as2r1, as2r2, as3r1):
+    def set_route_maps_for_community(self, community_list, as1r1, as2r1, as2r2, as3r1):
         for route_map_name in ['as3r1-ipv4-out', 'as3r1-ipv6-out']:
             as2r2.get_config(BGP).add_set_action(
                 name=route_map_name,
