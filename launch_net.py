@@ -8,6 +8,7 @@ from simple_bgp_network import SimpleBGPTopo
 from simple_bgp_community_local_pref import LocalPrefTopo
 from simple_bgp_community_prepend_as import PrependASTopo
 from simple_bgp_community_prepend_as_2 import PrependAS2Topo
+from simple_bgp_community_blackhole import BlackholeTopo
 
 import argparse
 
@@ -16,6 +17,7 @@ TOPOS = {
     'simple_bgp_community_local_pref': LocalPrefTopo,
     'simple_bgp_community_prepend_as': PrependASTopo,
     'simple_bgp_community_prepend_as_2': PrependAS2Topo,
+    'simple_bgp_community_blackhole': BlackholeTopo,
 }
 
 
@@ -34,9 +36,11 @@ if __name__ == '__main__':
     if args.log == 'debug':
         ipmininet.DEBUG_FLAG = True
     kwargs = {}
-    net = IPNet(topo=TOPOS[args.topo](**kwargs))
+    topo = TOPOS[args.topo](**kwargs)
+    net = IPNet(topo=topo)
     try:
         net.start()
+        topo.after_start(net)
         IPCLI(net)
     finally:
         net.stop()

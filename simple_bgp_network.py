@@ -1,4 +1,5 @@
 from typing import Optional
+from ipmininet.ipnet import IPNet
 from ipmininet.iptopo import IPTopo
 from ipmininet.router.config import BGP, ebgp_session, AccessList, CommunityList
 import ipmininet.router.config.bgp as _bgp
@@ -105,3 +106,6 @@ class SimpleBGPTopo(IPTopo):
                 for order, route_map_entry in route_map.entries.items():
                     if route_map_order == order:
                         route_map_entry.exit_policy = exit_policy
+
+    def after_start(self, net: IPNet):
+        pass
