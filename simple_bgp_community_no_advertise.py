@@ -3,11 +3,11 @@ from ipmininet.router.config.zebra import RouteMapSetAction
 from simple_bgp_network import SimpleBGPTopo
 
 
-class NoAdvertise(SimpleBGPTopo):
+class NoAdvertiseTopo(SimpleBGPTopo):
 
     def create_community_lists(self):
         community_list = CommunityList(
-            'NO_ADVERTISE', community='2:70')
+            'NO_ADVERTISE', community='65535:65282')
 
         return [community_list]
 

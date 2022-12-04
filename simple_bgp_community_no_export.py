@@ -3,11 +3,11 @@ from ipmininet.router.config.zebra import RouteMapSetAction
 from simple_bgp_network import SimpleBGPTopo
 
 
-class NoExport(SimpleBGPTopo):
+class NoExportTopo(SimpleBGPTopo):
 
     def create_community_lists(self):
         community_list = CommunityList(
-            'NO_EXPORT', community='2:60')
+            'NO_EXPORT', community='65535:65281')
 
         return [community_list]
 
