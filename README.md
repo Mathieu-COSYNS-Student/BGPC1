@@ -71,46 +71,46 @@ sudo python3 launch_net.py --topo=TODO
 ```
 
 * List available nodes
-```sh
+```
 mininet> nodes
 ```
 
 * Get the routes in `ipv4`/`ipv6` of a node NODE
-```sh
+```
 mininet> NODE route
 mininet> NODE route -6
 ```
 
 * Connect to a router for BGP configuration.
-```sh
+```
 mininet> noecho NODE telnet localhost bgpd
 // Password: zebra
 ```
 
 * Show router configuration.
-```sh
+```
 NODE> show running-config
 ```
 
 * Show router bgp routes.
-```sh
+```
 NODE> show bgp ipv4
 NODE> show bgp ipv6
 ```
 
 * Show list of community received/sent by a router.
-```sh
+```
 NODE> show bgp community-info
 ```
 
 * Edit bgp configuration
-```sh
+```
 NODE> enable
 NODE# configure terminal
 ```
 
 * To get informations about the different links and interfaces
-```bash
+```
 mininet> links
 ```
 
