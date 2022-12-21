@@ -41,8 +41,8 @@ class SimpleBGPTopo(IPTopo):
         all_al4 = AccessList(family='ipv4', name='allv4', entries=('any',))
         all_al6 = AccessList(family='ipv6', name='allv6', entries=('any',))
 
-        communities = ''
-        communities_sep = ''
+        communities = self.send_extra_communities()
+        communities_sep = '' if communities == '' else ' '
 
         for community_list in self.create_community_lists():
             self.set_route_maps_for_community(
@@ -80,6 +80,9 @@ class SimpleBGPTopo(IPTopo):
 
     def create_community_lists(self):
         return []
+
+    def send_extra_communities(self) -> str:
+        return ''
 
     def set_route_maps_for_community(self,
                                      community_list: CommunityList,
