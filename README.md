@@ -56,6 +56,7 @@ python3 launch_net.py --topo=TOPO
 where TOPO is one the following topologies:
 - simple_bgp_network
 - simple_bgp_community_local_pref
+- simple_bgp_community_local_pref_2
 - simple_bgp_community_prepend_as
 - simple_bgp_community_prepend_as_2
 - simple_bgp_community_no_advertise

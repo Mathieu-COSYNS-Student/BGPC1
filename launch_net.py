@@ -6,6 +6,7 @@ from mininet.log import lg, LEVELS
 
 from simple_bgp_network import SimpleBGPTopo
 from simple_bgp_community_local_pref import LocalPrefTopo
+from simple_bgp_community_local_pref_2 import LocalPref2Topo
 from simple_bgp_community_prepend_as import PrependASTopo
 from simple_bgp_community_no_advertise import NoAdvertiseTopo
 from simple_bgp_community_no_export import NoExportTopo
@@ -18,6 +19,7 @@ import argparse
 TOPOS = {
     'simple_bgp_network': SimpleBGPTopo,
     'simple_bgp_community_local_pref': LocalPrefTopo,
+    'simple_bgp_community_local_pref_2': LocalPref2Topo,
     'simple_bgp_community_prepend_as': PrependASTopo,
     'simple_bgp_community_prepend_as_2': PrependAS2Topo,
     'simple_bgp_community_no_advertise': NoAdvertiseTopo,
